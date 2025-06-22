@@ -27,8 +27,8 @@ params:
   # --- 首页个人简介配置 ---
   homeInfoParams:
     Avatar: "avatar.png" # 头像
-    Title: "IU_Roam" # 您的昵称
-    Content: "Young, Simple, Naive" # 您的简介
+    Title: "IU_Roam" # 昵称
+    Content: "Young, Simple, Naive" # 简介
 
   # --- 社交图标配置 ---
   socialIcons:
