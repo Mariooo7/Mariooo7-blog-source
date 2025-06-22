@@ -1,0 +1,31 @@
+baseURL = "https://github.com/Mariooo7/Mariooo7.github.io.git" 
+languageCode = "zh-cn" 
+title = "我的作品集与博客" 
+theme = "PaperMod" 
+
+# 启用 robots.txt，有助于搜索引擎优化
+enableRobotsTXT = true
+# 启用 Emoji，可以在文章中使用 Emoji 表情
+enableEmoji = true
+
+[params] 
+  author = "IU_Roam" 
+  description = "Day Day Up!" 
+  # 你可以在这里调整更多主题参数，具体参考PaperMod文档 
+
+[menu] 
+  [[menu.main]] 
+    identifier = "archives" 
+    name = "归档" 
+    url = "/archives/" 
+    weight = 10 
+  [[menu.main]] 
+    identifier = "search" 
+    name = "搜索" 
+    url = "/search/" 
+    weight = 20 
+  [[menu.main]] 
+    identifier = "tags" 
+    name = "标签" 
+    url = "/tags/" 
+    weight = 30

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>我的作品集与博客</title>
+    <link>http://localhost:1313/Mariooo7/Mariooo7.github.io.git/</link>
+    <description>Recent content on 我的作品集与博客</description>
+    <generator>Hugo -- 0.147.8</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 22 Jun 2025 17:59:31 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/Mariooo7/Mariooo7.github.io.git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Post</title>
+      <link>http://localhost:1313/Mariooo7/Mariooo7.github.io.git/posts/my-first-post/</link>
+      <pubDate>Sun, 22 Jun 2025 17:59:31 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7/Mariooo7.github.io.git/posts/my-first-post/</guid>
+      <description>&lt;p&gt;你好！✨🤣&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
