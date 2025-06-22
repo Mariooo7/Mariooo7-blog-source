@@ -6,8 +6,6 @@ summary: "记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改�
 tags: ["Hugo", "PaperMod", "GitHub Actions", "Web开发", "教程", "博客"]
 ---
 
-# Hugo + PaperMod + Github Actions 个人博客搭建方案与问题解决
-
 基于 PaperMod 主题，我们将从初始配置开始，重点解决两个核心问题：
 
 1. 如何通过**修改主题布局**来正确添加个人头像（Avatar）；
