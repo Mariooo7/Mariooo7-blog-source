@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Abouts on IU_Roam&#39;s Blog</title>
+    <link>http://localhost:1313/Mariooo7-blog-source/about/</link>
+    <description>Recent content in Abouts on IU_Roam&#39;s Blog</description>
+    <generator>Hugo -- 0.147.8</generator>
+    <language>zh-cn</language>
+    <copyright>IU_Roam 2024 - 2025</copyright>
+    <atom:link href="http://localhost:1313/Mariooo7-blog-source/about/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/about/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/about/about/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
