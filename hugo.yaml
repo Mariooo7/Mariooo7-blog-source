@@ -9,6 +9,7 @@ author: "IU_Roam"
 theme: ["PaperMod"]
 copyright: "© IU_Roam 2024 - 2025"
 enableRobotsTXT: true
+buildFuture: true
 
 # ============================================
 # -- Main Parameters

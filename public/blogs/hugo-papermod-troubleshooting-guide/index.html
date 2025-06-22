@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/Mariooo7-blog-source/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Mariooo7-blog-source/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 | IU_Roam&#39;s Blog</title>
+<meta name="keywords" content="Hugo, PaperMod, GitHub Actions, Web开发, 教程, 博客">
+<meta name="description" content="记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/">
+<link crossorigin="anonymous" href="/Mariooo7-blog-source/assets/css/stylesheet.2b30dfa247ccaec11b0403c6f4079f8925564f9111b6c18471cea5a4baa7a4be.css" integrity="sha256-KzDfokfMrsEbBAPG9AefiSVWT5ERtsGEcc6lpLqnpL4=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
+<link rel="mask-icon" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:url" content="http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/">
+  <meta property="og:site_name" content="IU_Roam&#39;s Blog">
+  <meta property="og:title" content="Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决">
+  <meta property="og:description" content="记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。">
+  <meta property="og:locale" content="zh-cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blogs">
+    <meta property="article:published_time" content="2025-06-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-06-23T00:00:00+00:00">
+    <meta property="article:tag" content="Hugo">
+    <meta property="article:tag" content="PaperMod">
+    <meta property="article:tag" content="GitHub Actions">
+    <meta property="article:tag" content="Web开发">
+    <meta property="article:tag" content="教程">
+    <meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决">
+<meta name="twitter:description" content="记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Blogs",
+      "item": "http://localhost:1313/Mariooo7-blog-source/blogs/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Hugo + PaperMod + Github Actions 个人博客搭建方案与问题解决",
+      "item": "http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Hugo + PaperMod + Github Actions 个人博客搭建方案与问题解决",
+  "name": "Hugo \u002b PaperMod \u002b Github Actions 个人博客搭建方案与问题解决",
+  "description": "记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。",
+  "keywords": [
+    "Hugo", "PaperMod", "GitHub Actions", "Web开发", "教程", "博客"
+  ],
+  "articleBody": "基于 PaperMod 主题，我们将从初始配置开始，重点解决两个核心问题：\n如何通过修改主题布局来正确添加个人头像（Avatar）；\n如何在不破坏 Git 子模块（Submodule）完整性的前提下，解决 GitHub Actions 自动化部署中的常见错误。\n第一部分：基础配置与头像定制 步骤 1：项目初始化 通过 Hugo CLI 创建站点，并使用 Git Submodule 添加 PaperMod 主题。\n# 创建站点 hugo new site Mariooo7-blog-source cd Mariooo7-blog-source git init # 添加 PaperMod 主题作为子模块 git submodule add [https://github.com/adityatelange/hugo-PaperMod.git](https://github.com/adityatelange/hugo-PaperMod.git) themes/PaperMod 步骤 2：添加主题定制布局 (实现头像显示) 经过验证，PaperMod 主题的默认“Home-Info Mode”（即首页显示文章列表的模式）本身并不支持显示个人头像。我们需要通过 Hugo 的文件覆盖机制，提供一个我们自己的布局文件来添加这个功能。\n创建目录结构: 在项目根目录下，创建以下路径的文件夹：layouts/partials/。 创建自定义布局文件: 在 layouts/partials/ 文件夹中，创建一个新文件，命名为 home_info.html。 添加代码: 修改 layouts/partials/home_info.html 文件。如下修改能令其读取你在配置文件中指定的头像，并将其显示在首页。 {{- with site.Params.homeInfoParams }} \u003carticle class=\"first-entry home-info\"\u003e {{- if .Avatar }} {{- $avatarPath := .Avatar }} {{- $avatar := \"\" }} {{- if or (hasPrefix $avatarPath \"http://\") (hasPrefix $avatarPath \"https://\") }} {{- $avatar = $avatarPath }} {{- else }} {{- with resources.Get $avatarPath }} {{- $avatarProc := .Resize \"150x150\" }} {{- $avatar = $avatarProc.RelPermalink }} {{- end }} {{- end }} {{- if $avatar }} \u003cimg src=\"{{ $avatar }}\" alt=\"{{ .AvatarTitle | default \"Author Avatar\" }}\" width=\"150\" height=\"150\" style=\"border-radius: 50%; margin: 0 auto 1em auto; display: block;\"\u003e {{- end }} {{- end }} \u003cheader class=\"entry-header\"\u003e \u003ch1\u003e{{ .Title | markdownify }}\u003c/h1\u003e \u003c/header\u003e \u003cdiv class=\"entry-content\"\u003e {{ .Content | markdownify }} \u003c/div\u003e \u003cfooter class=\"entry-footer\"\u003e {{ partial \"social_icons.html\" . }} \u003c/footer\u003e \u003c/article\u003e {{- end -}} 核心机制: 这段代码使用了 Hugo 的 resources.Get 函数。这个函数被设计为只在 /assets 目录中寻找和处理资源。\n头像图片必须放在该目录下！\n步骤 3：提供图片资源与完整配置 放置图片: 将个人头像（如 avatar.png）和网站图标（如 logo.png）全部放入项目根目录下的 /assets 文件夹。 配置 hugo.yaml: 使用以下这份更完整的配置，它包含了头像、图标、菜单和常用功能的开关。注意，所有图片路径都只使用纯文件名。 baseURL: [https://Mariooo7.github.io/](https://Mariooo7.github.io/) languageCode: zh-cn title: \"IU_Roam's Blog\" author: \"IU_Roam\" theme: [\"PaperMod\"] copyright: \"© IU_Roam 2024\" enableRobotsTXT: true params: defaultTheme: dark DateFormat: \"2006-01-02\" description: \"IU_Roam's blog, portfolio and thoughts.\" homeInfoParams: Avatar: \"avatar.png\" Title: \"IU_Roam\" Content: \"Young, Simple, Naive\" socialIcons: - name: \"github\" url: \"[https://github.com/Mariooo7](https://github.com/Mariooo7)\" - name: \"email\" url: \"mailto:maor7@mail2.sysu.edu.cn\" assets: favicon: \"logo.png\" favicon16x16: \"logo.png\" favicon32x32: \"logo.png\" apple_touch_icon: \"logo.png\" ShowReadingTime: true ShowShareButtons: true ShowCodeCopyButtons: true ShowPostNavLinks: true menu: main: - identifier: blogs name: Blogs url: /blogs/ weight: 10 - identifier: portfolio name: Portfolio url: /portfolio/ weight: 20 # ... 其他菜单项 第二部分：解决自动化部署错误 在使用官方提供的 GitHub Actions 工作流进行自动化部署时，如果直接修改了 themes/PaperMod 文件夹内的代码，会导致部署失败。\n问题根源：私有修改与公共仓库的冲突\n在本地修改子模块（themes/PaperMod）并提交时，主项目会记录一个指向这个新 commit 的链接。然而，这个 commit 只存在于您的本地，并不存在于 PaperMod 的官方公共仓库。因此，当 GitHub Actions 尝试从官方仓库拉取这个不存在的 commit 时，就会报错 did not contain [commit ID]。\n最终解决方案：Fork 主题，掌握完全控制权\n最标准、最彻底的解决方案，将主题的修改纳入自己的版本控制体系。\nFork 主题仓库: 在 GitHub 上，访问 PaperMod 的官方仓库 (adityatelange/hugo-PaperMod)，点击 “Fork” 按钮。这会在账户下创建一个完全属于自己的主题副本，例如 Mariooo7/hugo-PaperMod。 更新本地子模块的远程地址: 在本地电脑上，进入主项目的根目录，打开终端，执行以下命令，将子模块的远程地址 origin 从官方仓库切换到自己的 Fork 仓库。 # 进入主题子模块的目录 cd themes/PaperMod # 更改远程仓库的 URL git remote set-url origin [https://github.com/Mariooo7/hugo-PaperMod.git](https://github.com/Mariooo7/hugo-PaperMod.git) # （可选）验证更改是否成功 git remote -v # 应该显示 origin 指向您的 Mariooo7/hugo-PaperMod.git 推送主题修改: 现在可以将本地对主题的所有修改，安全地推送到自己的 Fork 仓库中。 # 仍然在 themes/PaperMod 目录下 git add . git commit -m \"feat: Add my theme customizations\" git push origin master # 或主题默认分支，如 main 更新主项目的子模块引用: 主题修改已经安全地保存在了自己的远程仓库。现在，回到主项目，记录下这个指向自己主题仓库的更新。 返回主项目根目录 cd ../.. 提交子模块的更新 git add themes/PaperMod git commit -m \"fix: Point submodule to personal theme fork\" git push origin main 完成以上步骤后，自动化部署流程将完全正常。GitHub Actions 的 checkout 步骤会从自己的 Fork 仓库中拉取主题，其中包含了所有的自定义修改，部署自然会成功。\n总结 无论是 Hugo 的资源管理，还是 Git 的子模块机制，它们都有自己的哲学。理解并遵循它们，事情会变得很简单；反之，则会陷入无尽的麻烦。\n如果纠结怎么把事情做得尽善尽美不知道还要折腾多久，但按既定的目标完成一个博客的搭建还是有很多办法能多快好省地解决。\n",
+  "wordCount" : "419",
+  "inLanguage": "en",
+  "datePublished": "2025-06-23T00:00:00Z",
+  "dateModified": "2025-06-23T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IU_Roam's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/Mariooo7-blog-source/logo.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/Mariooo7-blog-source/" accesskey="h" title="IU_Roam&#39;s Blog (Alt + H)">IU_Roam&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/Mariooo7-blog-source/blogs/" title="Blogs">
+                    <span>Blogs</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Mariooo7-blog-source/portfolio/" title="Portfolio">
+                    <span>Portfolio</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Mariooo7-blog-source/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Mariooo7-blog-source/archives/" title="Archives">
+                    <span>Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Mariooo7-blog-source/search/" title="Search">
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/Mariooo7-blog-source/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://picture-talk-game.cyou" title="Picture Talk Game">
+                    <span>Picture Talk Game</span>&nbsp;
+                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                        <path d="M15 3h6v6"></path>
+                        <path d="M10 14L21 3"></path>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决
+    </h1>
+    <div class="post-meta"><span title='2025-06-23 00:00:00 +0000 UTC'>2025-06-23</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;419 words
+
+</div>
+  </header> 
+  <div class="post-content"><p>基于 PaperMod 主题，我们将从初始配置开始，重点解决两个核心问题：</p>
+<ol>
+<li>
+<p>如何通过<strong>修改主题布局</strong>来正确添加个人头像（Avatar）；</p>
+</li>
+<li>
+<p>如何在<strong>不破坏 Git 子模块（Submodule）完整性</strong>的前提下，解决 GitHub Actions 自动化部署中的常见错误。</p>
+</li>
+</ol>
+<h3 id="第一部分基础配置与头像定制">第一部分：基础配置与头像定制<a hidden class="anchor" aria-hidden="true" href="#第一部分基础配置与头像定制">#</a></h3>
+<h4 id="步骤-1项目初始化">步骤 1：项目初始化<a hidden class="anchor" aria-hidden="true" href="#步骤-1项目初始化">#</a></h4>
+<p>通过 Hugo CLI 创建站点，并使用 Git Submodule 添加 PaperMod 主题。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 创建站点</span>
+</span></span><span style="display:flex;"><span>hugo new site Mariooo7-blog-source
+</span></span><span style="display:flex;"><span>cd Mariooo7-blog-source
+</span></span><span style="display:flex;"><span>git init
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加 PaperMod 主题作为子模块</span>
+</span></span><span style="display:flex;"><span>git submodule add <span style="color:#f92672">[</span>https://github.com/adityatelange/hugo-PaperMod.git<span style="color:#f92672">](</span>https://github.com/adityatelange/hugo-PaperMod.git<span style="color:#f92672">)</span> themes/PaperMod
+</span></span></code></pre></div><h4 id="步骤-2添加主题定制布局-实现头像显示">步骤 2：添加主题定制布局 (实现头像显示)<a hidden class="anchor" aria-hidden="true" href="#步骤-2添加主题定制布局-实现头像显示">#</a></h4>
+<p>经过验证，PaperMod 主题的默认“Home-Info Mode”（即首页显示文章列表的模式）<strong>本身并不支持显示个人头像</strong>。我们需要通过 Hugo 的文件覆盖机制，提供一个我们自己的布局文件来添加这个功能。</p>
+<ol>
+<li><strong>创建目录结构</strong>: 在项目<strong>根目录</strong>下，创建以下路径的文件夹：<code>layouts/partials/</code>。</li>
+<li><strong>创建自定义布局文件</strong>: 在 <code>layouts/partials/</code> 文件夹中，创建一个新文件，命名为 <code>home_info.html</code>。</li>
+<li><strong>添加代码</strong>: 修改 <code>layouts/partials/home_info.html</code> 文件。如下修改能令其读取你在配置文件中指定的头像，并将其显示在首页。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{- with site.Params.homeInfoParams }}
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">article</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;first-entry home-info&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    {{- if .Avatar }}
+</span></span><span style="display:flex;"><span>        {{- $avatarPath := .Avatar }}
+</span></span><span style="display:flex;"><span>        {{- $avatar := &#34;&#34; }}
+</span></span><span style="display:flex;"><span>        {{- if or (hasPrefix $avatarPath &#34;http://&#34;) (hasPrefix $avatarPath &#34;https://&#34;) }}
+</span></span><span style="display:flex;"><span>            {{- $avatar = $avatarPath }}
+</span></span><span style="display:flex;"><span>        {{- else }}
+</span></span><span style="display:flex;"><span>            {{- with resources.Get $avatarPath }}
+</span></span><span style="display:flex;"><span>                {{- $avatarProc := .Resize &#34;150x150&#34; }}
+</span></span><span style="display:flex;"><span>                {{- $avatar = $avatarProc.RelPermalink }}
+</span></span><span style="display:flex;"><span>            {{- end }}
+</span></span><span style="display:flex;"><span>        {{- end }}
+</span></span><span style="display:flex;"><span>        {{- if $avatar }}
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ $avatar }}&#34;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .AvatarTitle | default &#34;</span><span style="color:#a6e22e">Author</span> <span style="color:#a6e22e">Avatar</span><span style="color:#960050;background-color:#1e0010">&#34;</span> <span style="color:#960050;background-color:#1e0010">}}&#34;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;150&#34;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;150&#34;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;border-radius: 50%; margin: 0 auto 1em auto; display: block;&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        {{- end }}
+</span></span><span style="display:flex;"><span>    {{- end }}
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">header</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;entry-header&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">h1</span>&gt;{{ .Title | markdownify }}&lt;/<span style="color:#f92672">h1</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">header</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;entry-content&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        {{ .Content | markdownify }}
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">footer</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;entry-footer&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>        {{ partial &#34;social_icons.html&#34; . }}
+</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">footer</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">article</span>&gt;
+</span></span><span style="display:flex;"><span>{{- end -}}
+</span></span></code></pre></div><p><strong>核心机制</strong>: 这段代码使用了 Hugo 的 <code>resources.Get</code> 函数。这个函数被设计为<strong>只在 <code>/assets</code> 目录中寻找和处理资源</strong>。</p>
+<blockquote>
+<p>头像图片必须放在该目录下！</p></blockquote>
+<h4 id="步骤-3提供图片资源与完整配置">步骤 3：提供图片资源与完整配置<a hidden class="anchor" aria-hidden="true" href="#步骤-3提供图片资源与完整配置">#</a></h4>
+<ol>
+<li><strong>放置图片</strong>: 将个人头像（如 <code>avatar.png</code>）和网站图标（如 <code>logo.png</code>）<strong>全部放入项目根目录下的 <code>/assets</code> 文件夹</strong>。</li>
+<li><strong>配置 <code>hugo.yaml</code></strong>: 使用以下这份更完整的配置，它包含了头像、图标、菜单和常用功能的开关。注意，所有图片路径都只使用纯文件名。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">baseURL</span>: [<span style="color:#ae81ff">https://Mariooo7.github.io/](https://Mariooo7.github.io/)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">languageCode</span>: <span style="color:#ae81ff">zh-cn</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;IU_Roam&#39;s Blog&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;IU_Roam&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">theme</span>: [<span style="color:#e6db74">&#34;PaperMod&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">copyright</span>: <span style="color:#e6db74">&#34;© IU_Roam 2024&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">enableRobotsTXT</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">params</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">defaultTheme</span>: <span style="color:#ae81ff">dark</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DateFormat</span>: <span style="color:#e6db74">&#34;2006-01-02&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;IU_Roam&#39;s blog, portfolio and thoughts.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">homeInfoParams</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Avatar</span>: <span style="color:#e6db74">&#34;avatar.png&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Title</span>: <span style="color:#e6db74">&#34;IU_Roam&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Content</span>: <span style="color:#e6db74">&#34;Young, Simple, Naive&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">socialIcons</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;github&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;[https://github.com/Mariooo7](https://github.com/Mariooo7)&#34;</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;email&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;mailto:maor7@mail2.sysu.edu.cn&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">assets</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">favicon</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">favicon16x16</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">favicon32x32</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">apple_touch_icon</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowReadingTime</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowShareButtons</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowCodeCopyButtons</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowPostNavLinks</span>: <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">menu</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">main</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">identifier</span>: <span style="color:#ae81ff">blogs</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Blogs</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#ae81ff">/blogs/</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">identifier</span>: <span style="color:#ae81ff">portfolio</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Portfolio</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#ae81ff">/portfolio/</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... 其他菜单项</span>
+</span></span></code></pre></div><h3 id="第二部分解决自动化部署错误">第二部分：解决自动化部署错误<a hidden class="anchor" aria-hidden="true" href="#第二部分解决自动化部署错误">#</a></h3>
+<p>在使用官方提供的 GitHub Actions 工作流进行自动化部署时，如果直接修改了 <code>themes/PaperMod</code> 文件夹内的代码，会导致部署失败。</p>
+<p><strong>问题根源：私有修改与公共仓库的冲突</strong></p>
+<p>在本地修改子模块（<code>themes/PaperMod</code>）并提交时，主项目会记录一个指向这个新 commit 的链接。然而，这个 commit 只存在于您的本地，并不存在于 PaperMod 的官方公共仓库。因此，当 GitHub Actions 尝试从官方仓库拉取这个不存在的 commit 时，就会报错 <code>did not contain [commit ID]</code>。</p>
+<p><strong>最终解决方案：Fork 主题，掌握完全控制权</strong></p>
+<p>最标准、最彻底的解决方案，将主题的修改纳入自己的版本控制体系。</p>
+<ol>
+<li><strong>Fork 主题仓库</strong>: 在 GitHub 上，访问 PaperMod 的官方仓库 (<code>adityatelange/hugo-PaperMod</code>)，点击 <strong>&ldquo;Fork&rdquo;</strong> 按钮。这会在账户下创建一个完全属于自己的主题副本，例如 <code>Mariooo7/hugo-PaperMod</code>。</li>
+<li><strong>更新本地子模块的远程地址</strong>: 在本地电脑上，进入主项目的<strong>根目录</strong>，打开终端，执行以下命令，将子模块的远程地址 <code>origin</code> 从官方仓库切换到自己的 Fork 仓库。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 进入主题子模块的目录</span>
+</span></span><span style="display:flex;"><span>cd themes/PaperMod
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更改远程仓库的 URL</span>
+</span></span><span style="display:flex;"><span>git remote set-url origin <span style="color:#f92672">[</span>https://github.com/Mariooo7/hugo-PaperMod.git<span style="color:#f92672">](</span>https://github.com/Mariooo7/hugo-PaperMod.git<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># （可选）验证更改是否成功</span>
+</span></span><span style="display:flex;"><span>git remote -v
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 应该显示 origin 指向您的 Mariooo7/hugo-PaperMod.git</span>
+</span></span></code></pre></div><ol start="3">
+<li><strong>推送主题修改</strong>: 现在可以将本地对主题的所有修改，安全地推送到自己的 Fork 仓库中。</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 仍然在 themes/PaperMod 目录下</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;feat: Add my theme customizations&#34;</span>
+</span></span><span style="display:flex;"><span>git push origin master  <span style="color:#75715e"># 或主题默认分支，如 main</span>
+</span></span></code></pre></div><ol start="4">
+<li><strong>更新主项目的子模块引用</strong>: 主题修改已经安全地保存在了自己的远程仓库。现在，回到主项目，记录下这个指向自己主题仓库的更新。</li>
+</ol>
+<ul>
+<li><strong>返回主项目根目录</strong> <code>cd ../..</code></li>
+<li><strong>提交子模块的更新</strong> <code>git add themes/PaperMod</code> <code>git commit -m &quot;fix: Point submodule to personal theme fork&quot;</code> <code>git push origin main</code></li>
+</ul>
+<p>完成以上步骤后，自动化部署流程将完全正常。GitHub Actions 的 <code>checkout</code> 步骤会从自己的 Fork 仓库中拉取主题，其中包含了所有的自定义修改，部署自然会成功。</p>
+<h1 id="总结">总结<a hidden class="anchor" aria-hidden="true" href="#总结">#</a></h1>
+<p>无论是 Hugo 的资源管理，还是 Git 的子模块机制，它们都有自己的哲学。理解并遵循它们，事情会变得很简单；反之，则会陷入无尽的麻烦。</p>
+<p>如果纠结怎么把事情做得尽善尽美不知道还要折腾多久，但按既定的目标完成一个博客的搭建还是有很多办法能多快好省地解决。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/Mariooo7-blog-source/tags/hugo/">Hugo</a></li>
+      <li><a href="http://localhost:1313/Mariooo7-blog-source/tags/papermod/">PaperMod</a></li>
+      <li><a href="http://localhost:1313/Mariooo7-blog-source/tags/github-actions/">GitHub Actions</a></li>
+      <li><a href="http://localhost:1313/Mariooo7-blog-source/tags/web%E5%BC%80%E5%8F%91/">Web开发</a></li>
+      <li><a href="http://localhost:1313/Mariooo7-blog-source/tags/%E6%95%99%E7%A8%8B/">教程</a></li>
+      <li><a href="http://localhost:1313/Mariooo7-blog-source/tags/%E5%8D%9A%E5%AE%A2/">博客</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/Mariooo7-blog-source/blogs/my-first-post/">
+    <span class="title">Next »</span>
+    <br>
+    <span>My First Post</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 on x"
+            href="https://x.com/intent/tweet/?text=Hugo%20%2b%20PaperMod%20%2b%20Github%20Actions%20%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%96%b9%e6%a1%88%e4%b8%8e%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3&amp;url=http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f&amp;hashtags=Hugo%2cPaperMod%2cGitHubActions%2cWeb%e5%bc%80%e5%8f%91%2c%e6%95%99%e7%a8%8b%2c%e5%8d%9a%e5%ae%a2">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f&amp;title=Hugo%20%2b%20PaperMod%20%2b%20Github%20Actions%20%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%96%b9%e6%a1%88%e4%b8%8e%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3&amp;summary=Hugo%20%2b%20PaperMod%20%2b%20Github%20Actions%20%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%96%b9%e6%a1%88%e4%b8%8e%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3&amp;source=http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f&title=Hugo%20%2b%20PaperMod%20%2b%20Github%20Actions%20%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%96%b9%e6%a1%88%e4%b8%8e%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 on whatsapp"
+            href="https://api.whatsapp.com/send?text=Hugo%20%2b%20PaperMod%20%2b%20Github%20Actions%20%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%96%b9%e6%a1%88%e4%b8%8e%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3%20-%20http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 on telegram"
+            href="https://telegram.me/share/url?text=Hugo%20%2b%20PaperMod%20%2b%20Github%20Actions%20%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%96%b9%e6%a1%88%e4%b8%8e%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3&amp;url=http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决 on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Hugo%20%2b%20PaperMod%20%2b%20Github%20Actions%20%e4%b8%aa%e4%ba%ba%e5%8d%9a%e5%ae%a2%e6%90%ad%e5%bb%ba%e6%96%b9%e6%a1%88%e4%b8%8e%e9%97%ae%e9%a2%98%e8%a7%a3%e5%86%b3&u=http%3a%2f%2flocalhost%3a1313%2fMariooo7-blog-source%2fblogs%2fhugo-papermod-troubleshooting-guide%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>© IU_Roam 2024 - 2025</span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
