@@ -10,17 +10,19 @@ theme: ["PaperMod"]
 copyright: "© IU_Roam 2024 - 2025"
 enableRobotsTXT: true
 buildFuture: true
+pygmentsUseClasses: true
 
 # ============================================
 # -- Main Parameters
 # ============================================
 
 params:
+  mermaid: true
+  # --- 文章 ---
   env: production
   defaultTheme: auto
   DateFormat: "2006-01-02"
   description: "IU_Roam's blog, portfolio and thoughts."
-  
 
   # --- 首页个人简介配置 ---
   homeInfoParams:
@@ -40,7 +42,8 @@ params:
   ShowShareButtons: true
   ShowCodeCopyButtons: true
   ShowPostNavLinks: true
-  ShowWordCount: true
+  ShowToc: true
+  TocOpen: true
 
 
   assets:
@@ -49,6 +52,14 @@ params:
     favicon32x32: "logo.png"
     apple_touch_icon: "logo.png"
     safari_pinned_tab: "logo.png"
+
+markup:
+  markup.taleOfContents:  # 配置目录生成器
+    startLevel: 2    # 从 h2 开始生成目录
+    endLevel: 6      # 到 h6 结束
+  markup.goldmark:
+    renderer:
+      unsafe: true
 
 # ============================================
 # -- Navigation Menu

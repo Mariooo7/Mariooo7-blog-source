@@ -39,33 +39,25 @@ git submodule add [https://github.com/adityatelange/hugo-PaperMod.git](https://g
 ```html
 {{- with site.Params.homeInfoParams }}
 <article class="first-entry home-info">
-    {{- if .Avatar }}
-        {{- $avatarPath := .Avatar }}
-        {{- $avatar := "" }}
-        {{- if or (hasPrefix $avatarPath "http://") (hasPrefix $avatarPath "https://") }}
-            {{- $avatar = $avatarPath }}
-        {{- else }}
-            {{- with resources.Get $avatarPath }}
-                {{- $avatarProc := .Resize "150x150" }}
-                {{- $avatar = $avatarProc.RelPermalink }}
+    <header class="entry-header">
+        {{- with .Avatar }}
+            {{- $img := resources.Get . }}
+            {{- if $img }}
+                <img
+                    class="home-info-avatar"  src="{{ $img.Permalink }}"
+                    alt="Avatar"
+                    width="150"
+                    height="150"
+                />
             {{- end }}
         {{- end }}
-        {{- if $avatar }}
-        <img src="{{ $avatar }}"
-             alt="{{ .AvatarTitle | default "Author Avatar" }}"
-             width="150"
-             height="150"
-             style="border-radius: 50%; margin: 0 auto 1em auto; display: block;">
-        {{- end }}
-    {{- end }}
-    <header class="entry-header">
         <h1>{{ .Title | markdownify }}</h1>
     </header>
     <div class="entry-content">
         {{ .Content | markdownify }}
     </div>
     <footer class="entry-footer">
-        {{ partial "social_icons.html" . }}
+        {{ partial "social_icons.html" (dict "align" site.Params.homeInfoParams.AlignSocialIconsTo) }}
     </footer>
 </article>
 {{- end -}}
@@ -179,3 +171,4 @@ git push origin master  # 或主题默认分支，如 main
 无论是 Hugo 的资源管理，还是 Git 的子模块机制，它们都有自己的哲学。理解并遵循它们，事情会变得很简单；反之，则会陷入无尽的麻烦。
 
 如果纠结怎么把事情做得尽善尽美不知道还要折腾多久，但按既定的目标完成一个博客的搭建还是有很多办法能多快好省地解决。
+

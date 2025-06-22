@@ -10,7 +10,7 @@
 <meta name="description" content="记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/">
-<link crossorigin="anonymous" href="/Mariooo7-blog-source/assets/css/stylesheet.2b30dfa247ccaec11b0403c6f4079f8925564f9111b6c18471cea5a4baa7a4be.css" integrity="sha256-KzDfokfMrsEbBAPG9AefiSVWT5ERtsGEcc6lpLqnpL4=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/Mariooo7-blog-source/assets/css/stylesheet.1ac7af9f47355483d8e57a4f3b7527a9d18b2e0a617b5cc773db5e3fc73d9809.css" integrity="sha256-Gsevn0c1VIPY5XpPO3UnqdGLLgphe1zHc9teP8c9mAk=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/Mariooo7-blog-source/logo.png">
@@ -55,7 +55,7 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/">
+</noscript>=<meta property="og:url" content="http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/">
   <meta property="og:site_name" content="IU_Roam&#39;s Blog">
   <meta property="og:title" content="Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决">
   <meta property="og:description" content="记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。">
@@ -105,8 +105,8 @@
   "keywords": [
     "Hugo", "PaperMod", "GitHub Actions", "Web开发", "教程", "博客"
   ],
-  "articleBody": "基于 PaperMod 主题，我们将从初始配置开始，重点解决两个核心问题：\n如何通过修改主题布局来正确添加个人头像（Avatar）；\n如何在不破坏 Git 子模块（Submodule）完整性的前提下，解决 GitHub Actions 自动化部署中的常见错误。\n第一部分：基础配置与头像定制 步骤 1：项目初始化 通过 Hugo CLI 创建站点，并使用 Git Submodule 添加 PaperMod 主题。\n# 创建站点 hugo new site Mariooo7-blog-source cd Mariooo7-blog-source git init # 添加 PaperMod 主题作为子模块 git submodule add [https://github.com/adityatelange/hugo-PaperMod.git](https://github.com/adityatelange/hugo-PaperMod.git) themes/PaperMod 步骤 2：添加主题定制布局 (实现头像显示) 经过验证，PaperMod 主题的默认“Home-Info Mode”（即首页显示文章列表的模式）本身并不支持显示个人头像。我们需要通过 Hugo 的文件覆盖机制，提供一个我们自己的布局文件来添加这个功能。\n创建目录结构: 在项目根目录下，创建以下路径的文件夹：layouts/partials/。 创建自定义布局文件: 在 layouts/partials/ 文件夹中，创建一个新文件，命名为 home_info.html。 添加代码: 修改 layouts/partials/home_info.html 文件。如下修改能令其读取你在配置文件中指定的头像，并将其显示在首页。 {{- with site.Params.homeInfoParams }} \u003carticle class=\"first-entry home-info\"\u003e {{- if .Avatar }} {{- $avatarPath := .Avatar }} {{- $avatar := \"\" }} {{- if or (hasPrefix $avatarPath \"http://\") (hasPrefix $avatarPath \"https://\") }} {{- $avatar = $avatarPath }} {{- else }} {{- with resources.Get $avatarPath }} {{- $avatarProc := .Resize \"150x150\" }} {{- $avatar = $avatarProc.RelPermalink }} {{- end }} {{- end }} {{- if $avatar }} \u003cimg src=\"{{ $avatar }}\" alt=\"{{ .AvatarTitle | default \"Author Avatar\" }}\" width=\"150\" height=\"150\" style=\"border-radius: 50%; margin: 0 auto 1em auto; display: block;\"\u003e {{- end }} {{- end }} \u003cheader class=\"entry-header\"\u003e \u003ch1\u003e{{ .Title | markdownify }}\u003c/h1\u003e \u003c/header\u003e \u003cdiv class=\"entry-content\"\u003e {{ .Content | markdownify }} \u003c/div\u003e \u003cfooter class=\"entry-footer\"\u003e {{ partial \"social_icons.html\" . }} \u003c/footer\u003e \u003c/article\u003e {{- end -}} 核心机制: 这段代码使用了 Hugo 的 resources.Get 函数。这个函数被设计为只在 /assets 目录中寻找和处理资源。\n头像图片必须放在该目录下！\n步骤 3：提供图片资源与完整配置 放置图片: 将个人头像（如 avatar.png）和网站图标（如 logo.png）全部放入项目根目录下的 /assets 文件夹。 配置 hugo.yaml: 使用以下这份更完整的配置，它包含了头像、图标、菜单和常用功能的开关。注意，所有图片路径都只使用纯文件名。 baseURL: [https://Mariooo7.github.io/](https://Mariooo7.github.io/) languageCode: zh-cn title: \"IU_Roam's Blog\" author: \"IU_Roam\" theme: [\"PaperMod\"] copyright: \"© IU_Roam 2024\" enableRobotsTXT: true params: defaultTheme: dark DateFormat: \"2006-01-02\" description: \"IU_Roam's blog, portfolio and thoughts.\" homeInfoParams: Avatar: \"avatar.png\" Title: \"IU_Roam\" Content: \"Young, Simple, Naive\" socialIcons: - name: \"github\" url: \"[https://github.com/Mariooo7](https://github.com/Mariooo7)\" - name: \"email\" url: \"mailto:maor7@mail2.sysu.edu.cn\" assets: favicon: \"logo.png\" favicon16x16: \"logo.png\" favicon32x32: \"logo.png\" apple_touch_icon: \"logo.png\" ShowReadingTime: true ShowShareButtons: true ShowCodeCopyButtons: true ShowPostNavLinks: true menu: main: - identifier: blogs name: Blogs url: /blogs/ weight: 10 - identifier: portfolio name: Portfolio url: /portfolio/ weight: 20 # ... 其他菜单项 第二部分：解决自动化部署错误 在使用官方提供的 GitHub Actions 工作流进行自动化部署时，如果直接修改了 themes/PaperMod 文件夹内的代码，会导致部署失败。\n问题根源：私有修改与公共仓库的冲突\n在本地修改子模块（themes/PaperMod）并提交时，主项目会记录一个指向这个新 commit 的链接。然而，这个 commit 只存在于您的本地，并不存在于 PaperMod 的官方公共仓库。因此，当 GitHub Actions 尝试从官方仓库拉取这个不存在的 commit 时，就会报错 did not contain [commit ID]。\n最终解决方案：Fork 主题，掌握完全控制权\n最标准、最彻底的解决方案，将主题的修改纳入自己的版本控制体系。\nFork 主题仓库: 在 GitHub 上，访问 PaperMod 的官方仓库 (adityatelange/hugo-PaperMod)，点击 “Fork” 按钮。这会在账户下创建一个完全属于自己的主题副本，例如 Mariooo7/hugo-PaperMod。 更新本地子模块的远程地址: 在本地电脑上，进入主项目的根目录，打开终端，执行以下命令，将子模块的远程地址 origin 从官方仓库切换到自己的 Fork 仓库。 # 进入主题子模块的目录 cd themes/PaperMod # 更改远程仓库的 URL git remote set-url origin [https://github.com/Mariooo7/hugo-PaperMod.git](https://github.com/Mariooo7/hugo-PaperMod.git) # （可选）验证更改是否成功 git remote -v # 应该显示 origin 指向您的 Mariooo7/hugo-PaperMod.git 推送主题修改: 现在可以将本地对主题的所有修改，安全地推送到自己的 Fork 仓库中。 # 仍然在 themes/PaperMod 目录下 git add . git commit -m \"feat: Add my theme customizations\" git push origin master # 或主题默认分支，如 main 更新主项目的子模块引用: 主题修改已经安全地保存在了自己的远程仓库。现在，回到主项目，记录下这个指向自己主题仓库的更新。 返回主项目根目录 cd ../.. 提交子模块的更新 git add themes/PaperMod git commit -m \"fix: Point submodule to personal theme fork\" git push origin main 完成以上步骤后，自动化部署流程将完全正常。GitHub Actions 的 checkout 步骤会从自己的 Fork 仓库中拉取主题，其中包含了所有的自定义修改，部署自然会成功。\n总结 无论是 Hugo 的资源管理，还是 Git 的子模块机制，它们都有自己的哲学。理解并遵循它们，事情会变得很简单；反之，则会陷入无尽的麻烦。\n如果纠结怎么把事情做得尽善尽美不知道还要折腾多久，但按既定的目标完成一个博客的搭建还是有很多办法能多快好省地解决。\n",
-  "wordCount" : "419",
+  "articleBody": "基于 PaperMod 主题，我们将从初始配置开始，重点解决两个核心问题：\n如何通过修改主题布局来正确添加个人头像（Avatar）；\n如何在不破坏 Git 子模块（Submodule）完整性的前提下，解决 GitHub Actions 自动化部署中的常见错误。\n第一部分：基础配置与头像定制 步骤 1：项目初始化 通过 Hugo CLI 创建站点，并使用 Git Submodule 添加 PaperMod 主题。\n# 创建站点 hugo new site Mariooo7-blog-source cd Mariooo7-blog-source git init # 添加 PaperMod 主题作为子模块 git submodule add [https://github.com/adityatelange/hugo-PaperMod.git](https://github.com/adityatelange/hugo-PaperMod.git) themes/PaperMod 步骤 2：添加主题定制布局 (实现头像显示) 经过验证，PaperMod 主题的默认“Home-Info Mode”（即首页显示文章列表的模式）本身并不支持显示个人头像。我们需要通过 Hugo 的文件覆盖机制，提供一个我们自己的布局文件来添加这个功能。\n创建目录结构: 在项目根目录下，创建以下路径的文件夹：layouts/partials/。 创建自定义布局文件: 在 layouts/partials/ 文件夹中，创建一个新文件，命名为 home_info.html。 添加代码: 修改 layouts/partials/home_info.html 文件。如下修改能令其读取你在配置文件中指定的头像，并将其显示在首页。 {{- with site.Params.homeInfoParams }} \u003carticle class=\"first-entry home-info\"\u003e \u003cheader class=\"entry-header\"\u003e {{- with .Avatar }} {{- $img := resources.Get . }} {{- if $img }} \u003cimg class=\"home-info-avatar\" src=\"{{ $img.Permalink }}\" alt=\"Avatar\" width=\"150\" height=\"150\" /\u003e {{- end }} {{- end }} \u003ch1\u003e{{ .Title | markdownify }}\u003c/h1\u003e \u003c/header\u003e \u003cdiv class=\"entry-content\"\u003e {{ .Content | markdownify }} \u003c/div\u003e \u003cfooter class=\"entry-footer\"\u003e {{ partial \"social_icons.html\" (dict \"align\" site.Params.homeInfoParams.AlignSocialIconsTo) }} \u003c/footer\u003e \u003c/article\u003e {{- end -}} 核心机制: 这段代码使用了 Hugo 的 resources.Get 函数。这个函数被设计为只在 /assets 目录中寻找和处理资源。\n头像图片必须放在该目录下！\n步骤 3：提供图片资源与完整配置 放置图片: 将个人头像（如 avatar.png）和网站图标（如 logo.png）全部放入项目根目录下的 /assets 文件夹。 配置 hugo.yaml: 使用以下这份更完整的配置，它包含了头像、图标、菜单和常用功能的开关。注意，所有图片路径都只使用纯文件名。 baseURL: [https://Mariooo7.github.io/](https://Mariooo7.github.io/) languageCode: zh-cn title: \"IU_Roam's Blog\" author: \"IU_Roam\" theme: [\"PaperMod\"] copyright: \"© IU_Roam 2024\" enableRobotsTXT: true params: defaultTheme: dark DateFormat: \"2006-01-02\" description: \"IU_Roam's blog, portfolio and thoughts.\" homeInfoParams: Avatar: \"avatar.png\" Title: \"IU_Roam\" Content: \"Young, Simple, Naive\" socialIcons: - name: \"github\" url: \"[https://github.com/Mariooo7](https://github.com/Mariooo7)\" - name: \"email\" url: \"mailto:maor7@mail2.sysu.edu.cn\" assets: favicon: \"logo.png\" favicon16x16: \"logo.png\" favicon32x32: \"logo.png\" apple_touch_icon: \"logo.png\" ShowReadingTime: true ShowShareButtons: true ShowCodeCopyButtons: true ShowPostNavLinks: true menu: main: - identifier: blogs name: Blogs url: /blogs/ weight: 10 - identifier: portfolio name: Portfolio url: /portfolio/ weight: 20 # ... 其他菜单项 第二部分：解决自动化部署错误 在使用官方提供的 GitHub Actions 工作流进行自动化部署时，如果直接修改了 themes/PaperMod 文件夹内的代码，会导致部署失败。\n问题根源：私有修改与公共仓库的冲突\n在本地修改子模块（themes/PaperMod）并提交时，主项目会记录一个指向这个新 commit 的链接。然而，这个 commit 只存在于您的本地，并不存在于 PaperMod 的官方公共仓库。因此，当 GitHub Actions 尝试从官方仓库拉取这个不存在的 commit 时，就会报错 did not contain [commit ID]。\n最终解决方案：Fork 主题，掌握完全控制权\n最标准、最彻底的解决方案，将主题的修改纳入自己的版本控制体系。\nFork 主题仓库: 在 GitHub 上，访问 PaperMod 的官方仓库 (adityatelange/hugo-PaperMod)，点击 “Fork” 按钮。这会在账户下创建一个完全属于自己的主题副本，例如 Mariooo7/hugo-PaperMod。 更新本地子模块的远程地址: 在本地电脑上，进入主项目的根目录，打开终端，执行以下命令，将子模块的远程地址 origin 从官方仓库切换到自己的 Fork 仓库。 # 进入主题子模块的目录 cd themes/PaperMod # 更改远程仓库的 URL git remote set-url origin [https://github.com/Mariooo7/hugo-PaperMod.git](https://github.com/Mariooo7/hugo-PaperMod.git) # （可选）验证更改是否成功 git remote -v # 应该显示 origin 指向您的 Mariooo7/hugo-PaperMod.git 推送主题修改: 现在可以将本地对主题的所有修改，安全地推送到自己的 Fork 仓库中。 # 仍然在 themes/PaperMod 目录下 git add . git commit -m \"feat: Add my theme customizations\" git push origin master # 或主题默认分支，如 main 更新主项目的子模块引用: 主题修改已经安全地保存在了自己的远程仓库。现在，回到主项目，记录下这个指向自己主题仓库的更新。 返回主项目根目录 cd ../.. 提交子模块的更新 git add themes/PaperMod git commit -m \"fix: Point submodule to personal theme fork\" git push origin main 完成以上步骤后，自动化部署流程将完全正常。GitHub Actions 的 checkout 步骤会从自己的 Fork 仓库中拉取主题，其中包含了所有的自定义修改，部署自然会成功。\n总结 无论是 Hugo 的资源管理，还是 Git 的子模块机制，它们都有自己的哲学。理解并遵循它们，事情会变得很简单；反之，则会陷入无尽的麻烦。\n如果纠结怎么把事情做得尽善尽美不知道还要折腾多久，但按既定的目标完成一个博客的搭建还是有很多办法能多快好省地解决。\n",
+  "wordCount" : "364",
   "inLanguage": "en",
   "datePublished": "2025-06-23T00:00:00Z",
   "dateModified": "2025-06-23T00:00:00Z",
@@ -218,10 +218,38 @@
     <h1 class="post-title entry-hint-parent">
       Hugo &#43; PaperMod &#43; Github Actions 个人博客搭建方案与问题解决
     </h1>
-    <div class="post-meta"><span title='2025-06-23 00:00:00 +0000 UTC'>2025-06-23</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;419 words
+    <div class="post-meta"><span title='2025-06-23 00:00:00 +0000 UTC'>2025-06-23</span>&nbsp;·&nbsp;2 min
 
 </div>
-  </header> 
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul><ul><ul>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%80%e9%83%a8%e5%88%86%e5%9f%ba%e7%a1%80%e9%85%8d%e7%bd%ae%e4%b8%8e%e5%a4%b4%e5%83%8f%e5%ae%9a%e5%88%b6" aria-label="第一部分：基础配置与头像定制">第一部分：基础配置与头像定制</a><ul>
+                        
+                <li>
+                    <a href="#%e6%ad%a5%e9%aa%a4-1%e9%a1%b9%e7%9b%ae%e5%88%9d%e5%a7%8b%e5%8c%96" aria-label="步骤 1：项目初始化">步骤 1：项目初始化</a></li>
+                <li>
+                    <a href="#%e6%ad%a5%e9%aa%a4-2%e6%b7%bb%e5%8a%a0%e4%b8%bb%e9%a2%98%e5%ae%9a%e5%88%b6%e5%b8%83%e5%b1%80-%e5%ae%9e%e7%8e%b0%e5%a4%b4%e5%83%8f%e6%98%be%e7%a4%ba" aria-label="步骤 2：添加主题定制布局 (实现头像显示)">步骤 2：添加主题定制布局 (实现头像显示)</a></li>
+                <li>
+                    <a href="#%e6%ad%a5%e9%aa%a4-3%e6%8f%90%e4%be%9b%e5%9b%be%e7%89%87%e8%b5%84%e6%ba%90%e4%b8%8e%e5%ae%8c%e6%95%b4%e9%85%8d%e7%bd%ae" aria-label="步骤 3：提供图片资源与完整配置">步骤 3：提供图片资源与完整配置</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%ba%8c%e9%83%a8%e5%88%86%e8%a7%a3%e5%86%b3%e8%87%aa%e5%8a%a8%e5%8c%96%e9%83%a8%e7%bd%b2%e9%94%99%e8%af%af" aria-label="第二部分：解决自动化部署错误">第二部分：解决自动化部署错误</a></li></ul>
+                    </ul>
+                    
+                <li>
+                    <a href="#%e6%80%bb%e7%bb%93" aria-label="总结">总结</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
   <div class="post-content"><p>基于 PaperMod 主题，我们将从初始配置开始，重点解决两个核心问题：</p>
 <ol>
 <li>
@@ -234,13 +262,13 @@
 <h3 id="第一部分基础配置与头像定制">第一部分：基础配置与头像定制<a hidden class="anchor" aria-hidden="true" href="#第一部分基础配置与头像定制">#</a></h3>
 <h4 id="步骤-1项目初始化">步骤 1：项目初始化<a hidden class="anchor" aria-hidden="true" href="#步骤-1项目初始化">#</a></h4>
 <p>通过 Hugo CLI 创建站点，并使用 Git Submodule 添加 PaperMod 主题。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 创建站点</span>
-</span></span><span style="display:flex;"><span>hugo new site Mariooo7-blog-source
-</span></span><span style="display:flex;"><span>cd Mariooo7-blog-source
-</span></span><span style="display:flex;"><span>git init
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加 PaperMod 主题作为子模块</span>
-</span></span><span style="display:flex;"><span>git submodule add <span style="color:#f92672">[</span>https://github.com/adityatelange/hugo-PaperMod.git<span style="color:#f92672">](</span>https://github.com/adityatelange/hugo-PaperMod.git<span style="color:#f92672">)</span> themes/PaperMod
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 创建站点</span>
+</span></span><span class="line"><span class="cl">hugo new site Mariooo7-blog-source
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> Mariooo7-blog-source
+</span></span><span class="line"><span class="cl">git init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加 PaperMod 主题作为子模块</span>
+</span></span><span class="line"><span class="cl">git submodule add <span class="o">[</span>https://github.com/adityatelange/hugo-PaperMod.git<span class="o">](</span>https://github.com/adityatelange/hugo-PaperMod.git<span class="o">)</span> themes/PaperMod
 </span></span></code></pre></div><h4 id="步骤-2添加主题定制布局-实现头像显示">步骤 2：添加主题定制布局 (实现头像显示)<a hidden class="anchor" aria-hidden="true" href="#步骤-2添加主题定制布局-实现头像显示">#</a></h4>
 <p>经过验证，PaperMod 主题的默认“Home-Info Mode”（即首页显示文章列表的模式）<strong>本身并不支持显示个人头像</strong>。我们需要通过 Hugo 的文件覆盖机制，提供一个我们自己的布局文件来添加这个功能。</p>
 <ol>
@@ -248,38 +276,30 @@
 <li><strong>创建自定义布局文件</strong>: 在 <code>layouts/partials/</code> 文件夹中，创建一个新文件，命名为 <code>home_info.html</code>。</li>
 <li><strong>添加代码</strong>: 修改 <code>layouts/partials/home_info.html</code> 文件。如下修改能令其读取你在配置文件中指定的头像，并将其显示在首页。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>{{- with site.Params.homeInfoParams }}
-</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">article</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;first-entry home-info&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>    {{- if .Avatar }}
-</span></span><span style="display:flex;"><span>        {{- $avatarPath := .Avatar }}
-</span></span><span style="display:flex;"><span>        {{- $avatar := &#34;&#34; }}
-</span></span><span style="display:flex;"><span>        {{- if or (hasPrefix $avatarPath &#34;http://&#34;) (hasPrefix $avatarPath &#34;https://&#34;) }}
-</span></span><span style="display:flex;"><span>            {{- $avatar = $avatarPath }}
-</span></span><span style="display:flex;"><span>        {{- else }}
-</span></span><span style="display:flex;"><span>            {{- with resources.Get $avatarPath }}
-</span></span><span style="display:flex;"><span>                {{- $avatarProc := .Resize &#34;150x150&#34; }}
-</span></span><span style="display:flex;"><span>                {{- $avatar = $avatarProc.RelPermalink }}
-</span></span><span style="display:flex;"><span>            {{- end }}
-</span></span><span style="display:flex;"><span>        {{- end }}
-</span></span><span style="display:flex;"><span>        {{- if $avatar }}
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ $avatar }}&#34;</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;{{ .AvatarTitle | default &#34;</span><span style="color:#a6e22e">Author</span> <span style="color:#a6e22e">Avatar</span><span style="color:#960050;background-color:#1e0010">&#34;</span> <span style="color:#960050;background-color:#1e0010">}}&#34;</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;150&#34;</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;150&#34;</span>
-</span></span><span style="display:flex;"><span>             <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;border-radius: 50%; margin: 0 auto 1em auto; display: block;&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>        {{- end }}
-</span></span><span style="display:flex;"><span>    {{- end }}
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">header</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;entry-header&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>        &lt;<span style="color:#f92672">h1</span>&gt;{{ .Title | markdownify }}&lt;/<span style="color:#f92672">h1</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">header</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;entry-content&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>        {{ .Content | markdownify }}
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">div</span>&gt;
-</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">footer</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;entry-footer&#34;</span>&gt;
-</span></span><span style="display:flex;"><span>        {{ partial &#34;social_icons.html&#34; . }}
-</span></span><span style="display:flex;"><span>    &lt;/<span style="color:#f92672">footer</span>&gt;
-</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">article</span>&gt;
-</span></span><span style="display:flex;"><span>{{- end -}}
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">{{- with site.Params.homeInfoParams }}
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">article</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;first-entry home-info&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;entry-header&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{- with .Avatar }}
+</span></span><span class="line"><span class="cl">            {{- $img := resources.Get . }}
+</span></span><span class="line"><span class="cl">            {{- if $img }}
+</span></span><span class="line"><span class="cl">                <span class="p">&lt;</span><span class="nt">img</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">class</span><span class="o">=</span><span class="s">&#34;home-info-avatar&#34;</span>  <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ $img.Permalink }}&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">alt</span><span class="o">=</span><span class="s">&#34;Avatar&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">width</span><span class="o">=</span><span class="s">&#34;150&#34;</span>
+</span></span><span class="line"><span class="cl">                    <span class="na">height</span><span class="o">=</span><span class="s">&#34;150&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">            {{- end }}
+</span></span><span class="line"><span class="cl">        {{- end }}
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ .Title | markdownify }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;entry-content&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{ .Content | markdownify }}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;entry-footer&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{ partial &#34;social_icons.html&#34; (dict &#34;align&#34; site.Params.homeInfoParams.AlignSocialIconsTo) }}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">{{- end -}}
 </span></span></code></pre></div><p><strong>核心机制</strong>: 这段代码使用了 Hugo 的 <code>resources.Get</code> 函数。这个函数被设计为<strong>只在 <code>/assets</code> 目录中寻找和处理资源</strong>。</p>
 <blockquote>
 <p>头像图片必须放在该目录下！</p></blockquote>
@@ -288,53 +308,53 @@
 <li><strong>放置图片</strong>: 将个人头像（如 <code>avatar.png</code>）和网站图标（如 <code>logo.png</code>）<strong>全部放入项目根目录下的 <code>/assets</code> 文件夹</strong>。</li>
 <li><strong>配置 <code>hugo.yaml</code></strong>: 使用以下这份更完整的配置，它包含了头像、图标、菜单和常用功能的开关。注意，所有图片路径都只使用纯文件名。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">baseURL</span>: [<span style="color:#ae81ff">https://Mariooo7.github.io/](https://Mariooo7.github.io/)</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">languageCode</span>: <span style="color:#ae81ff">zh-cn</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">title</span>: <span style="color:#e6db74">&#34;IU_Roam&#39;s Blog&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">author</span>: <span style="color:#e6db74">&#34;IU_Roam&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">theme</span>: [<span style="color:#e6db74">&#34;PaperMod&#34;</span>]
-</span></span><span style="display:flex;"><span><span style="color:#f92672">copyright</span>: <span style="color:#e6db74">&#34;© IU_Roam 2024&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">enableRobotsTXT</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">params</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">defaultTheme</span>: <span style="color:#ae81ff">dark</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">DateFormat</span>: <span style="color:#e6db74">&#34;2006-01-02&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;IU_Roam&#39;s blog, portfolio and thoughts.&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">homeInfoParams</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Avatar</span>: <span style="color:#e6db74">&#34;avatar.png&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Title</span>: <span style="color:#e6db74">&#34;IU_Roam&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">Content</span>: <span style="color:#e6db74">&#34;Young, Simple, Naive&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">socialIcons</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;github&#34;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;[https://github.com/Mariooo7](https://github.com/Mariooo7)&#34;</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;email&#34;</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#e6db74">&#34;mailto:maor7@mail2.sysu.edu.cn&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">assets</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">favicon</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">favicon16x16</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">favicon32x32</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">apple_touch_icon</span>: <span style="color:#e6db74">&#34;logo.png&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowReadingTime</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowShareButtons</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowCodeCopyButtons</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ShowPostNavLinks</span>: <span style="color:#66d9ef">true</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">menu</span>:
-</span></span><span style="display:flex;"><span>  <span style="color:#f92672">main</span>:
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">identifier</span>: <span style="color:#ae81ff">blogs</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Blogs</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#ae81ff">/blogs/</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">10</span>
-</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">identifier</span>: <span style="color:#ae81ff">portfolio</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Portfolio</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">url</span>: <span style="color:#ae81ff">/portfolio/</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#f92672">weight</span>: <span style="color:#ae81ff">20</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ... 其他菜单项</span>
-</span></span></code></pre></div><h3 id="第二部分解决自动化部署错误">第二部分：解决自动化部署错误<a hidden class="anchor" aria-hidden="true" href="#第二部分解决自动化部署错误">#</a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">baseURL</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">https://Mariooo7.github.io/](https://Mariooo7.github.io/)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">languageCode</span><span class="p">:</span><span class="w"> </span><span class="l">zh-cn</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;IU_Roam&#39;s Blog&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">author</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;IU_Roam&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">theme</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;PaperMod&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">copyright</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;© IU_Roam 2024&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">enableRobotsTXT</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">defaultTheme</span><span class="p">:</span><span class="w"> </span><span class="l">dark</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">DateFormat</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2006-01-02&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;IU_Roam&#39;s blog, portfolio and thoughts.&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">homeInfoParams</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Avatar</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;avatar.png&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;IU_Roam&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">Content</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Young, Simple, Naive&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">socialIcons</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;github&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;[https://github.com/Mariooo7](https://github.com/Mariooo7)&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;email&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;mailto:maor7@mail2.sysu.edu.cn&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">assets</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">favicon</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;logo.png&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">favicon16x16</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;logo.png&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">favicon32x32</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;logo.png&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">apple_touch_icon</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;logo.png&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ShowReadingTime</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ShowShareButtons</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ShowCodeCopyButtons</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ShowPostNavLinks</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">menu</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">main</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l">blogs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Blogs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">/blogs/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l">portfolio</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Portfolio</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l">/portfolio/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">weight</span><span class="p">:</span><span class="w"> </span><span class="m">20</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># ... 其他菜单项</span><span class="w">
+</span></span></span></code></pre></div><h3 id="第二部分解决自动化部署错误">第二部分：解决自动化部署错误<a hidden class="anchor" aria-hidden="true" href="#第二部分解决自动化部署错误">#</a></h3>
 <p>在使用官方提供的 GitHub Actions 工作流进行自动化部署时，如果直接修改了 <code>themes/PaperMod</code> 文件夹内的代码，会导致部署失败。</p>
 <p><strong>问题根源：私有修改与公共仓库的冲突</strong></p>
 <p>在本地修改子模块（<code>themes/PaperMod</code>）并提交时，主项目会记录一个指向这个新 commit 的链接。然而，这个 commit 只存在于您的本地，并不存在于 PaperMod 的官方公共仓库。因此，当 GitHub Actions 尝试从官方仓库拉取这个不存在的 commit 时，就会报错 <code>did not contain [commit ID]</code>。</p>
@@ -344,22 +364,22 @@
 <li><strong>Fork 主题仓库</strong>: 在 GitHub 上，访问 PaperMod 的官方仓库 (<code>adityatelange/hugo-PaperMod</code>)，点击 <strong>&ldquo;Fork&rdquo;</strong> 按钮。这会在账户下创建一个完全属于自己的主题副本，例如 <code>Mariooo7/hugo-PaperMod</code>。</li>
 <li><strong>更新本地子模块的远程地址</strong>: 在本地电脑上，进入主项目的<strong>根目录</strong>，打开终端，执行以下命令，将子模块的远程地址 <code>origin</code> 从官方仓库切换到自己的 Fork 仓库。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 进入主题子模块的目录</span>
-</span></span><span style="display:flex;"><span>cd themes/PaperMod
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 更改远程仓库的 URL</span>
-</span></span><span style="display:flex;"><span>git remote set-url origin <span style="color:#f92672">[</span>https://github.com/Mariooo7/hugo-PaperMod.git<span style="color:#f92672">](</span>https://github.com/Mariooo7/hugo-PaperMod.git<span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># （可选）验证更改是否成功</span>
-</span></span><span style="display:flex;"><span>git remote -v
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 应该显示 origin 指向您的 Mariooo7/hugo-PaperMod.git</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 进入主题子模块的目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> themes/PaperMod
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 更改远程仓库的 URL</span>
+</span></span><span class="line"><span class="cl">git remote set-url origin <span class="o">[</span>https://github.com/Mariooo7/hugo-PaperMod.git<span class="o">](</span>https://github.com/Mariooo7/hugo-PaperMod.git<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># （可选）验证更改是否成功</span>
+</span></span><span class="line"><span class="cl">git remote -v
+</span></span><span class="line"><span class="cl"><span class="c1"># 应该显示 origin 指向您的 Mariooo7/hugo-PaperMod.git</span>
 </span></span></code></pre></div><ol start="3">
 <li><strong>推送主题修改</strong>: 现在可以将本地对主题的所有修改，安全地推送到自己的 Fork 仓库中。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 仍然在 themes/PaperMod 目录下</span>
-</span></span><span style="display:flex;"><span>git add .
-</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;feat: Add my theme customizations&#34;</span>
-</span></span><span style="display:flex;"><span>git push origin master  <span style="color:#75715e"># 或主题默认分支，如 main</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 仍然在 themes/PaperMod 目录下</span>
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;feat: Add my theme customizations&#34;</span>
+</span></span><span class="line"><span class="cl">git push origin master  <span class="c1"># 或主题默认分支，如 main</span>
 </span></span></code></pre></div><ol start="4">
 <li><strong>更新主项目的子模块引用</strong>: 主题修改已经安全地保存在了自己的远程仓库。现在，回到主项目，记录下这个指向自己主题仓库的更新。</li>
 </ol>
@@ -477,7 +497,10 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
         <path d="M12 6H0l6-6z" />
     </svg>
-</a>
+</a><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
 
 <script>
     let menu = document.getElementById('menu')
