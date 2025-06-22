@@ -1,0 +1,90 @@
+# ============================================
+# -- Main Configuration
+# ============================================
+
+baseURL: https://Mariooo7.github.io
+languageCode: zh-cn # 语言设置为中文
+title: "IU_Roam's Blog" # 网站标题
+author: "IU_Roam"
+theme: ["PaperMod"]
+copyright: "© IU_Roam 2024 - 2025"
+enableRobotsTXT: true
+
+# ============================================
+# -- Main Parameters
+# ============================================
+
+params:
+  env: production
+  defaultTheme: auto
+  DateFormat: "2006-01-02"
+  description: "IU_Roam's blog, portfolio and thoughts."
+  
+
+  # --- 首页个人简介配置 ---
+  homeInfoParams:
+    Avatar: "avatar.png" # 头像
+    Title: "IU_Roam" # 您的昵称
+    Content: "Young, Simple, Naive" # 您的简介
+
+  # --- 社交图标配置 ---
+  socialIcons:
+    - name: "github"
+      url: "https://github.com/Mariooo7"
+    - name: "email"
+      url: "mailto:maor7@mail2.sysu.edu.cn"
+
+  # --- 文章页面功能 ---
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowCodeCopyButtons: true
+  ShowPostNavLinks: true
+  ShowWordCount: true
+
+
+  assets:
+    favicon: "logo.png"
+    favicon16x16: "logo.png"
+    favicon32x32: "logo.png"
+    apple_touch_icon: "logo.png"
+    safari_pinned_tab: "logo.png"
+
+# ============================================
+# -- Navigation Menu
+# ============================================
+
+menu:
+  main:
+    - identifier: blogs
+      name: Blogs
+      url: /blogs/
+      weight: 10
+    - identifier: portfolio
+      name: Portfolio
+      url: /portfolio/
+      weight: 20
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 30
+    - identifier: archives
+      name: Archives
+      url: /archives/
+      weight: 40
+    # --- 搜索功能 ---
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 50
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 60
+    # --- 外部链接 ---
+    - identifier: picture-talk-game
+      name: Picture Talk Game
+      url: https://picture-talk-game.cyou
+      weight: 70
+      params:
+        # 这会让链接在新标签页中打开
+        target: _blank 
