@@ -15,7 +15,6 @@ profileMode:
       url: "/archives"
     - name: "作品集"
       url: "/portfolio"
-    
 ---
 
 ## 👋 关于我
