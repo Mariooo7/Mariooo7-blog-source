@@ -3,7 +3,7 @@ title: "Hugo + PaperMod + Github Actions 个人博客搭建方案与问题解决
 date: 2025-06-23
 draft: false
 summary: "记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。"
-tags: ["Hugo", "PaperMod", "GitHub Actions", "Web开发", "教程", ""博客"]
+tags: ["Hugo", "PaperMod", "GitHub Actions", "Web开发", "教程", "博客"]
 ---
 
 # Hugo + PaperMod + Github Actions 个人博客搭建方案与问题解决
