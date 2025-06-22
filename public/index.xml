@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>IU_Roam&#39;s Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>http://localhost:1313/Mariooo7-nlog-source/</link>
     <description>Recent content on IU_Roam&#39;s Blog</description>
     <generator>Hugo -- 0.147.8</generator>
     <language>zh-cn</language>
     <copyright>IU_Roam 2024 - 2025</copyright>
     <lastBuildDate>Sun, 22 Jun 2025 23:39:43 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/Mariooo7-nlog-source/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Portfolio</title>
-      <link>http://localhost:1313/portfolio/</link>
+      <link>http://localhost:1313/Mariooo7-nlog-source/portfolio/</link>
       <pubDate>Sun, 22 Jun 2025 23:39:43 +0800</pubDate>
-      <guid>http://localhost:1313/portfolio/</guid>
+      <guid>http://localhost:1313/Mariooo7-nlog-source/portfolio/</guid>
       <description></description>
     </item>
     <item>
       <title>My First Post</title>
-      <link>http://localhost:1313/blogs/my-first-post/</link>
+      <link>http://localhost:1313/Mariooo7-nlog-source/blogs/my-first-post/</link>
       <pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/blogs/my-first-post/</guid>
+      <guid>http://localhost:1313/Mariooo7-nlog-source/blogs/my-first-post/</guid>
       <description>Hi!</description>
     </item>
   </channel>

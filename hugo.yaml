@@ -2,7 +2,7 @@
 # -- Main Configuration
 # ============================================
 
-baseURL: https://Mariooo7.github.io
+baseURL: https://Mariooo7.github.io/Mariooo7-nlog-source
 languageCode: zh-cn # 语言设置为中文
 title: "IU_Roam's Blog" # 网站标题
 author: "IU_Roam"
