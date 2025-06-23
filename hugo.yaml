@@ -53,10 +53,10 @@ params:
       url: "mailto:maor7@mail2.sysu.edu.cn"
 
   # --- 文章页面功能 ---
-  ShowReadingTime: true
   ShowShareButtons: true
   ShowCodeCopyButtons: true
   ShowPostNavLinks: true
+  ShowBreadCrumbs: true
   ShowToc: true
   TocOpen: true
 
