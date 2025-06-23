@@ -68,6 +68,10 @@ params:
     apple_touch_icon: "logo.png"
     safari_pinned_tab: "logo.png"
 
+  seo:
+    ShowCanonicalLink: true
+    ShowFullTextinRSS: true
+
 markup:
   markup.taleOfContents:  # 配置目录生成器
     startLevel: 2    # 从 h2 开始生成目录
@@ -75,10 +79,6 @@ markup:
   markup.goldmark:
     renderer:
       unsafe: true
-
-  seo:
-    ShowCanonicalLink: true
-    ShowFullTextinRSS: true
 # ============================================
 # -- Navigation Menu
 # ============================================
