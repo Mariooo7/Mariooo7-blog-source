@@ -6,6 +6,7 @@ summary: "一个基于自动化模型选择的端到端时间序列预测项目�
 tags: ["数据科学","机器学习","Python","时间序列预测"]
 cover:
   image: "cover.png"
+slug:"tourism-demand-forecast"
 ---
 
 ## Situation
