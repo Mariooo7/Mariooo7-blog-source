@@ -138,7 +138,8 @@ graph TD
         D1[LightGBM];
         D2[CatBoost];
         D3[Random Forest];
-        D3[Stacking];
+        D4[...]
+        D5[Stacking];
     end
     C --> E{比较所有模型MAPE};
     D --> E;
