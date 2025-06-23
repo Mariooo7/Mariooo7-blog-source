@@ -110,13 +110,13 @@ round 7 特征筛选效果对比
 1.  **时序模型轨 (基于 `statsforecast` 库)**:
     * 该库的优势在于其统一的API。无论是`AutoARIMA`还是`MSTL`，都遵循相同的调用方式 ，使得在一个循环中就能完成对多种复杂时序模型的统一训练和评估。
 
-<img src="./assets/image-20250623232326159.png" alt="image-20250623232326159" style="zoom:50%;" />
+<img src="./assets/image-20250623232326159.png"/>
 
 1. **回归模型轨 (基于 `scikit-learn` 兼容接口)**:
 
    * 利用梯度提升树模型（如`LightGBM`, `CatBoost`）处理高维特征的优势。通过将所有模型封装在统一的字典结构中，实现了脚本化的统一管理 ，并为Stacking模型融合提供了便利。
 
-   <img src="./assets/image-20250623232402557.png" alt="image-20250623232402557" style="zoom:50%;" />
+   <img src="./assets/image-20250623232402557.png"/>
 
 ---
 
