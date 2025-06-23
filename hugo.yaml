@@ -18,6 +18,21 @@ pygmentsUseClasses: true
 
 params:
   mermaid: true
+  # --- 搜索 ---
+  search:
+    enable: true
+    # 搜索功能使用的索引文件
+    index:
+      - "index.json"
+      - "blog.json"
+      - "portfolio.json"
+      - "tags.json"
+      - "archives.json"
+    # 搜索功能使用的语言
+    language:
+      - "en"
+      - "zh-cn"
+      - "zh-tw"
   # --- 文章 ---
   env: production
   defaultTheme: auto
@@ -99,4 +114,11 @@ menu:
       weight: 70
       params:
         # 这会让链接在新标签页中打开
-        target: _blank 
+        target: _blank
+
+# 输出格式
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
