@@ -2,8 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/tags/ai/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/tags/andrej-karpathy/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/Mariooo7-blog-source/blogs/</loc>
-    <lastmod>2025-06-23T00:00:00+00:00</lastmod>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/tags/llm/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/tags/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/tags/%E6%BC%94%E8%AE%B2/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B63.0/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/blogs/karpathy-speech-software3/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2025-06-23T08:06:44+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Mariooo7-blog-source/tags/github-actions/</loc>
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
@@ -14,13 +41,7 @@
     <loc>http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/</loc>
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/Mariooo7-blog-source/</loc>
-    <lastmod>2025-06-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/Mariooo7-blog-source/tags/papermod/</loc>
-    <lastmod>2025-06-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/Mariooo7-blog-source/tags/</loc>
     <lastmod>2025-06-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/Mariooo7-blog-source/tags/web%E5%BC%80%E5%8F%91/</loc>

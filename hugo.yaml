@@ -71,7 +71,7 @@ params:
 markup:
   markup.taleOfContents:  # 配置目录生成器
     startLevel: 2    # 从 h2 开始生成目录
-    endLevel: 6      # 到 h6 结束
+    endLevel: 4      # 到 h4 结束
   markup.goldmark:
     renderer:
       unsafe: true

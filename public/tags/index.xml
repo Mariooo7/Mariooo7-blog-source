@@ -1,20 +1,97 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>“” on IU_Roam&#39;s Blog</title>
+    <title>Tags on IU_Roam&#39;s Blog</title>
     <link>http://localhost:1313/Mariooo7-blog-source/tags/</link>
-    <description>Recent content in “” on IU_Roam&#39;s Blog</description>
+    <description>Recent content in Tags on IU_Roam&#39;s Blog</description>
     <generator>Hugo -- 0.147.8</generator>
     <language>zh-cn</language>
     <copyright>IU_Roam 2024 - 2025</copyright>
     <lastBuildDate>Mon, 23 Jun 2025 08:06:44 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/Mariooo7-blog-source/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>软件3.0：AI时代的编程革命与未来机遇</title>
-      <link>http://localhost:1313/Mariooo7-blog-source/blogs/karpathy-speech-software3/</link>
+      <title>AI</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/ai/</link>
       <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
-      <guid>http://localhost:1313/Mariooo7-blog-source/blogs/karpathy-speech-software3/</guid>
-      <description>在过去几年中，软件世界经历了前所未有的剧变。前特斯拉人工智能总监安德烈·卡帕西（Andrej Karpathy）的演讲揭示了这一根本性变革</description>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/ai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Andrej Karpathy</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/andrej-karpathy/</link>
+      <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/andrej-karpathy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LLM</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/llm/</link>
+      <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/llm/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>演讲</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%BC%94%E8%AE%B2/</link>
+      <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%BC%94%E8%AE%B2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>软件3.0</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B63.0/</link>
+      <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B63.0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>软件开发</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>GitHub Actions</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/github-actions/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/github-actions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hugo</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/hugo/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PaperMod</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/papermod/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/papermod/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web开发</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/web%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/web%E5%BC%80%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>博客</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E5%8D%9A%E5%AE%A2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>教程</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%95%99%E7%A8%8B/</link>
+      <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%95%99%E7%A8%8B/</guid>
+      <description></description>
     </item>
   </channel>
 </rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>演讲 on IU_Roam&#39;s Blog</title>
+    <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%BC%94%E8%AE%B2/</link>
+    <description>Recent content in 演讲 on IU_Roam&#39;s Blog</description>
+    <generator>Hugo -- 0.147.8</generator>
+    <language>zh-cn</language>
+    <copyright>IU_Roam 2024 - 2025</copyright>
+    <lastBuildDate>Mon, 23 Jun 2025 08:06:44 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/Mariooo7-blog-source/tags/%E6%BC%94%E8%AE%B2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>软件3.0：AI时代的编程革命与未来机遇</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/blogs/karpathy-speech-software3/</link>
+      <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/blogs/karpathy-speech-software3/</guid>
+      <description>在过去几年中，软件世界经历了前所未有的剧变。前特斯拉人工智能总监安德烈·卡帕西（Andrej Karpathy）的演讲揭示了这一根本性变革</description>
+    </item>
+  </channel>
+</rss>
