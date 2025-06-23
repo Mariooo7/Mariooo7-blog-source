@@ -76,6 +76,9 @@ markup:
     renderer:
       unsafe: true
 
+  seo:
+    ShowCanonicalLink: true
+    ShowFullTextinRSS: true
 # ============================================
 # -- Navigation Menu
 # ============================================
