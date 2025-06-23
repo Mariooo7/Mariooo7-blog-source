@@ -3,7 +3,7 @@ title: "软件3.0：AI时代的编程革命与未来机遇"
 date: 2025-06-23T08:06:44+08:00
 draft: false
 summary: "在过去几年中，软件世界经历了前所未有的剧变。前特斯拉人工智能总监安德烈·卡帕西（Andrej Karpathy）的演讲揭示了这一根本性变革"
-tags: ["软件3.0", "LLM", "Andrej Karpathy", "AI","软件开发"，"演讲"]
+tags: ["软件3.0", "LLM", "Andrej Karpathy", "AI","软件开发", "演讲"]
 cover:
   image: "cover.png"
 ---
