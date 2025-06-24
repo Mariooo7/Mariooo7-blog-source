@@ -11,6 +11,8 @@ slug: "tourism-demand-forecast"
 
 > 项目仓库:[Mariooo7/SYSU-Tourism-Demand-Forecasting-2025](https://github.com/Mariooo7/SYSU-Tourism-Demand-Forecasting-2025)
 
+---
+
 ## Situation
 
 本项目来源于“旅游大数据预测”课程竞赛，主题是解决一个动态且复杂的真实预测问题：**为香港五大口岸精准预测未来五日的入境游客量**，并每日进行当日轮次的预测结果提交用于评分。
