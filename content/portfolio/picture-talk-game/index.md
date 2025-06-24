@@ -1,5 +1,5 @@
 ---
-title: "Picture Talk: 基于提示词和文生图的人机对抗网页游戏"
+title: "Picture Talk: 基于AIGC的人机对抗网页游戏"
 date: 2025-06-24T20:30:00+08:00
 draft: false
 tags: ["产品", "AIGC", "全栈开发", "网页游戏", "提示词", "原型设计", "PRD"]
