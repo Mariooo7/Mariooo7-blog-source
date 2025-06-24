@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>电子商务 on IU_Roam&#39;s Blog</title>
+    <link>http://localhost:1313/Mariooo7-blog-source/tags/%E7%94%B5%E5%AD%90%E5%95%86%E5%8A%A1/</link>
+    <description>Recent content in 电子商务 on IU_Roam&#39;s Blog</description>
+    <generator>Hugo -- 0.147.8</generator>
+    <language>zh-cn</language>
+    <copyright>IU_Roam 2024 - 2025</copyright>
+    <lastBuildDate>Tue, 24 Jun 2025 16:26:22 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/Mariooo7-blog-source/tags/%E7%94%B5%E5%AD%90%E5%95%86%E5%8A%A1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Z世代二手平台使用意愿影响机制的实证研究</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/portfolio/gen-z-user-behavior-analysis/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/portfolio/gen-z-user-behavior-analysis/</guid>
+      <description>一项运用R语言和结构方程模型(SEM)的实证研究，分析影响Z世代使用二手交易平台的关键因素</description>
+    </item>
+  </channel>
+</rss>

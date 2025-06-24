@@ -7,8 +7,50 @@
     <generator>Hugo -- 0.147.8</generator>
     <language>zh-cn</language>
     <copyright>IU_Roam 2024 - 2025</copyright>
-    <lastBuildDate>Mon, 23 Jun 2025 08:06:44 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 24 Jun 2025 18:28:14 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/Mariooo7-blog-source/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>中达校园配送——从0到1构建校园“最后一公里”解决方案</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/portfolio/campus-delivery-business-plan/</link>
+      <pubDate>Tue, 24 Jun 2025 18:28:14 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/portfolio/campus-delivery-business-plan/</guid>
+      <description>针对校园物流痛点，提出产品方案并产出商业计划书</description>
+    </item>
+    <item>
+      <title>“秘密旅行”餐厅如何凭借“小而美”战略实现14年持续经营</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/portfolio/internet-famous-restaurant-case-study/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/portfolio/internet-famous-restaurant-case-study/</guid>
+      <description>通过对品牌主理人和用户的访谈、社交媒体情感分析等方法，探究其“小而美”经营理念如何通过差异化、创新性、可持续发展及社群参与四大支柱，实现长达14年的可持续经营。</description>
+    </item>
+    <item>
+      <title>Z世代二手平台使用意愿影响机制的实证研究</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/portfolio/gen-z-user-behavior-analysis/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/portfolio/gen-z-user-behavior-analysis/</guid>
+      <description>一项运用R语言和结构方程模型(SEM)的实证研究，分析影响Z世代使用二手交易平台的关键因素</description>
+    </item>
+    <item>
+      <title>知识社区芳华已逝</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/blogs/zhihu-will-die/</link>
+      <pubDate>Tue, 24 Jun 2025 02:02:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/blogs/zhihu-will-die/</guid>
+      <description>当知乎宣布首次全面盈利时，我们庆祝的是商业模式的胜利，还是知识社区模式的最终消亡？</description>
+    </item>
+    <item>
+      <title>PRD 撰写方法论</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/blogs/how-to-write-prd/</link>
+      <pubDate>Tue, 24 Jun 2025 01:37:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/blogs/how-to-write-prd/</guid>
+      <description>探讨产品需求文档 (PRD) 的核心功能与结构化框架</description>
+    </item>
+    <item>
+      <title>多轮次的香港五个重要口岸游客流量预测：基于自动化流程</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/portfolio/tourism-demand-forecast/</link>
+      <pubDate>Mon, 23 Jun 2025 23:32:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/portfolio/tourism-demand-forecast/</guid>
+      <description>一个基于自动化模型选择的端到端时间序列预测项目，涵盖从数据探索、特征工程到双轨建模与自动化决策的全过程</description>
+    </item>
     <item>
       <title>软件3.0：AI时代的编程革命与未来机遇</title>
       <link>http://localhost:1313/Mariooo7-blog-source/blogs/karpathy-speech-software3/</link>
@@ -22,13 +64,6 @@
       <pubDate>Mon, 23 Jun 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Mariooo7-blog-source/blogs/hugo-papermod-troubleshooting-guide/</guid>
       <description>记录首次完整的 Hugo PaperMod 博客搭建流程，通过修改主题源码实现个人头像图片显示，并解决了 GitHub Actions 自动化部署中 Git Submodule 的核心错误。</description>
-    </item>
-    <item>
-      <title>Portfolio</title>
-      <link>http://localhost:1313/Mariooo7-blog-source/portfolio/</link>
-      <pubDate>Sun, 22 Jun 2025 23:39:43 +0800</pubDate>
-      <guid>http://localhost:1313/Mariooo7-blog-source/portfolio/</guid>
-      <description></description>
     </item>
     <item>
       <title>About Me</title>

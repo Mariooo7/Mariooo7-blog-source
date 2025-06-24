@@ -7,8 +7,218 @@
     <generator>Hugo -- 0.147.8</generator>
     <language>zh-cn</language>
     <copyright>IU_Roam 2024 - 2025</copyright>
-    <lastBuildDate>Mon, 23 Jun 2025 08:06:44 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 24 Jun 2025 18:28:14 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/Mariooo7-blog-source/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MVP</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/mvp/</link>
+      <pubDate>Tue, 24 Jun 2025 18:28:14 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/mvp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>PRD</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/prd/</link>
+      <pubDate>Tue, 24 Jun 2025 18:28:14 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/prd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>产品</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E4%BA%A7%E5%93%81/</link>
+      <pubDate>Tue, 24 Jun 2025 18:28:14 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E4%BA%A7%E5%93%81/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>商业计划书</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E5%95%86%E4%B8%9A%E8%AE%A1%E5%88%92%E4%B9%A6/</link>
+      <pubDate>Tue, 24 Jun 2025 18:28:14 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E5%95%86%E4%B8%9A%E8%AE%A1%E5%88%92%E4%B9%A6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>物流</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E7%89%A9%E6%B5%81/</link>
+      <pubDate>Tue, 24 Jun 2025 18:28:14 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E7%89%A9%E6%B5%81/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>品牌战略</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E5%93%81%E7%89%8C%E6%88%98%E7%95%A5/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E5%93%81%E7%89%8C%E6%88%98%E7%95%A5/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>数据分析</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>服务管理</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>案例研究</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>爬虫</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E7%88%AC%E8%99%AB/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>访谈</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E8%AE%BF%E8%B0%88/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E8%AE%BF%E8%B0%88/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>质性分析</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E8%B4%A8%E6%80%A7%E5%88%86%E6%9E%90/</link>
+      <pubDate>Tue, 24 Jun 2025 17:45:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E8%B4%A8%E6%80%A7%E5%88%86%E6%9E%90/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>R</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/r/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/r/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SEM</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/sem/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/sem/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Z世代</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/z%E4%B8%96%E4%BB%A3/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/z%E4%B8%96%E4%BB%A3/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>二手交易</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E4%BA%8C%E6%89%8B%E4%BA%A4%E6%98%93/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>用户研究</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E7%94%A8%E6%88%B7%E7%A0%94%E7%A9%B6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>电子商务</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E7%94%B5%E5%AD%90%E5%95%86%E5%8A%A1/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E7%94%B5%E5%AD%90%E5%95%86%E5%8A%A1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>问卷</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E9%97%AE%E5%8D%B7/</link>
+      <pubDate>Tue, 24 Jun 2025 16:26:22 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E9%97%AE%E5%8D%B7/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AIGC</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/aigc/</link>
+      <pubDate>Tue, 24 Jun 2025 02:02:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/aigc/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>内容平台</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E5%86%85%E5%AE%B9%E5%B9%B3%E5%8F%B0/</link>
+      <pubDate>Tue, 24 Jun 2025 02:02:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E5%86%85%E5%AE%B9%E5%B9%B3%E5%8F%B0/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>商业模式</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Tue, 24 Jun 2025 02:02:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>知乎</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E7%9F%A5%E4%B9%8E/</link>
+      <pubDate>Tue, 24 Jun 2025 02:02:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E7%9F%A5%E4%B9%8E/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>社区</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E7%A4%BE%E5%8C%BA/</link>
+      <pubDate>Tue, 24 Jun 2025 02:02:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E7%A4%BE%E5%8C%BA/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>方法论</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</link>
+      <pubDate>Tue, 24 Jun 2025 01:37:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>软件开发</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</link>
+      <pubDate>Tue, 24 Jun 2025 01:37:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/python/</link>
+      <pubDate>Mon, 23 Jun 2025 23:32:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>数据科学</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/</link>
+      <pubDate>Mon, 23 Jun 2025 23:32:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>时间序列预测</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%A2%84%E6%B5%8B/</link>
+      <pubDate>Mon, 23 Jun 2025 23:32:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%A2%84%E6%B5%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>机器学习</title>
+      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</link>
+      <pubDate>Mon, 23 Jun 2025 23:32:00 +0800</pubDate>
+      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AI</title>
       <link>http://localhost:1313/Mariooo7-blog-source/tags/ai/</link>
@@ -42,13 +252,6 @@
       <link>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B63.0/</link>
       <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
       <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B63.0/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>软件开发</title>
-      <link>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</link>
-      <pubDate>Mon, 23 Jun 2025 08:06:44 +0800</pubDate>
-      <guid>http://localhost:1313/Mariooo7-blog-source/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</guid>
       <description></description>
     </item>
     <item>
